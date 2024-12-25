@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "276707090150",
+    "project_id": "sigma-detector",
+    "storage_bucket": "sigma-detector.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:276707090150:android:0fa5859ef24901c633a527",
+        "android_client_info": {
+          "package_name": "com.rizzlabs.sigma_de"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9CYQxGMv_RjVFbUKF_rBfgdrh1w2kvgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:276707090150:android:1a2af50ad2752e3633a527",
+        "android_client_info": {
+          "package_name": "com.rizzlabs.sigma_detector"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9CYQxGMv_RjVFbUKF_rBfgdrh1w2kvgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
