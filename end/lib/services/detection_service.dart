@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:sigma_detector/repositories/sigma_repository.dart';
 import 'package:sigma_detector/utils/custom_loggy.dart';
-import 'package:sigma_detector/utils/log_extension.dart';
 
 import 'package:uuid/uuid.dart';
 
