@@ -14,6 +14,11 @@ class SigmaRepository with RepositoryLoggy {
     String encodedImage = base64Encode(imageBytes);
     loggy.debug("Encoded image: $encodedImage");
 
-    return _api.getSigmaData(uid, encodedImage);
+    try {
+      return _api.getSigmaData(uid, encodedImage);
+    } catch (e) {
+      loggy.error("Error fetching data from API", e);
+      return false;
+    }
   }
 }

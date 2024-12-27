@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:isolate';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:sigma_detector/services/detection_service.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:sigma_detector/utils/crashlytics_printer.dart';
+import 'package:sigma_detector/utils/custom_loggy.dart';
 import 'package:sigma_detector/utils/file_printer.dart';
 import 'package:sigma_detector/utils/multi_printer.dart';
 import 'firebase_options.dart';
@@ -34,6 +36,26 @@ void main() {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
+
+    // Catch Fatal errors thrown by the flutter framework itself
+    FlutterError.onError = (errorDetails) {
+      FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+    };
+
+    // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+    PlatformDispatcher.instance.onError = (error, stack) {
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+      return true;
+    };
+
+    //Catch errors outside Flutter's context
+    Isolate.current.addErrorListener(RawReceivePort((List<String> pair) async {
+      final List<dynamic> errorAndStacktrace = pair;
+      await FirebaseCrashlytics.instance.recordError(
+        errorAndStacktrace.first,
+        StackTrace.fromString(errorAndStacktrace.last),
+      );
+    }).sendPort);
 
     // Obtain a list of the available cameras on the device.
     final cameras = await availableCameras();
