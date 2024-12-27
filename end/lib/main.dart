@@ -25,11 +25,12 @@ void main() {
     WidgetsFlutterBinding.ensureInitialized();
 
     Loggy.initLoggy(
-      hierarchicalLogging: true,
       logPrinter: StreamPrinter(
-        kReleaseMode
-            ? MultiPrinter({const CrashlyticsPrinter(), FilePrinter()})
-            : const PrettyDeveloperPrinter(),
+        MultiPrinter({
+          PrettyDeveloperPrinter(),
+          const CrashlyticsPrinter(),
+          FilePrinter(),
+        }),
       ),
     );
 
