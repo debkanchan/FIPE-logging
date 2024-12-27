@@ -6,6 +6,14 @@ class CrashlyticsPrinter extends PrettyPrinter {
 
   @override
   void onLog(LogRecord record) {
+    if (record.level == LogLevel.error) {
+      FirebaseCrashlytics.instance.recordError(
+        record.message,
+        record.stackTrace,
+        reason: record.error,
+      );
+    }
+
     FirebaseCrashlytics.instance.log(record.toString());
 
     super.onLog(record);
